@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2 class="mb-4">Dashboard</h2>
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total Products</h5>
+                <h2 class="card-text">{{ product_count }}</h2>
+                <a href="{{ url_for('products') }}" class="text-white">View Products</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card bg-warning text-dark">
+            <div class="card-body">
+                <h5 class="card-title">Low Stock Items</h5>
+                <h2 class="card-text">{{ low_stock }}</h2>
+                <a href="{{ url_for('inventory') }}" class="text-dark">View Inventory</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5 class="card-title">Today's Sales</h5>
+                <h2 class="card-text">${{ "%.2f"|format(today_sales) }}</h2>
+                <a href="{{ url_for('sales') }}" class="text-white">View Sales</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mt-4">
+    <div class="card-header">
+        <h5>Quick Actions</h5>
+    </div>
+    <div class="card-body">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <a href="{{ url_for('products') }}?action=add" class="btn btn-primary me-md-2">
+                <i class="bi bi-plus-circle"></i> Add Product
+            </a>
+            <a href="{{ url_for('inventory') }}" class="btn btn-warning me-md-2">
+                <i class="bi bi-exclamation-triangle"></i> Check Low Stock
+            </a>
+            <a href="{{ url_for('sales') }}" class="btn btn-success">
+                <i class="bi bi-graph-up"></i> View Sales Report
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

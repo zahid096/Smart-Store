@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% block title %}Inventory Management{% endblock %}
+{% block content %}
+<h2 class="mb-4">Inventory Management</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Current Stock Status</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Unit</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in inventory %}
+                            <tr>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>{{ item.unit }}</td>
+                                <td>
+                                    {% if item.status == 'Out of Stock' %}
+                                    <span class="badge bg-danger">{{ item.status }}</span>
+                                    {% elif item.status == 'Low Stock' %}
+                                    <span class="badge bg-warning text-dark">{{ item.status }}</span>
+                                    {% else %}
+                                    <span class="badge bg-success">{{ item.status }}</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Stock History (Last 50 Changes)</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Old Qty</th>
+                                <th>New Qty</th>
+                                <th>Change Type</th>
+                                <th>Date</th>
+                                <th>User</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for history in stock_history %}
+                            <tr>
+                                <td>{{ history.name }}</td>
+                                <td>{{ history.old_quantity }}</td>
+                                <td>{{ history.new_quantity }}</td>
+                                <td>{{ history.change_type }}</td>
+                                <td>{{ history.created_at }}</td>
+                                <td>{{ history.username }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,136 @@
+{% extends "layout.html" %}
+{% block title %}Point of Sale{% endblock %}
+{% block content %}
+<h2 class="mb-4">Point of Sale</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Available Products</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>In Stock</th>
+                                <th>Quantity</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in products %}
+                            <tr>
+                                <td>{{ product.name }}</td>
+                                <td>${{ "%.2f"|format(product.price) }}</td>
+                                <td>{{ product.quantity }} {{ product.unit }}</td>
+                                <td style="width: 120px;">
+                                    <form method="POST" action="{{ url_for('point_of_sale') }}" class="row g-2">
+                                        <input type="hidden" name="add_to_cart" value="1">
+                                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                                        <div class="col-7">
+                                            <input type="number" name="quantity" value="1" min="1"
+                                                max="{{ product.quantity }}" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-5">
+                                            <button type="submit" class="btn btn-sm btn-primary">Add</button>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Current Sale</h5>
+                <a href="{{ url_for('clear_cart') }}" class="btn btn-sm btn-danger">Clear</a>
+            </div>
+            <div class="card-body">
+                {% if cart_items %}
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in cart_items %}
+                            <tr>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>${{ "%.2f"|format(item.price) }}</td>
+                                <td>${{ "%.2f"|format(item.total) }}</td>
+                                <td class="text-end">
+                                    <form method="POST" action="{{ url_for('point_of_sale') }}" class="d-inline">
+                                        <input type="hidden" name="remove_from_cart" value="1">
+                                        <input type="hidden" name="cart_id" value="{{ item.cart_id }}">
+                                        <button type="submit" class="btn btn-sm btn-danger">×</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-active">
+                                <th colspan="3">Total</th>
+                                <th colspan="2">${{ "%.2f"|format(cart_total) }}</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <!-- Customer Name Input Field -->
+                <form method="POST" action="{{ url_for('point_of_sale') }}" id="processSaleForm">
+                    <input type="hidden" name="process_sale" value="1">
+
+                    <div class="mb-3">
+                        <label for="customer_name" class="form-label">Customer Name</label>
+                        <input type="text" class="form-control" id="customer_name" name="customer_name"
+                            placeholder="Enter customer name" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100 mt-3">
+                        Process Sale
+                    </button>
+                </form>
+                {% else %}
+                <div class="text-center text-muted py-4">
+                    <h5>Cart is empty</h5>
+                    <p>Add products from the list</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const processSaleForm = document.getElementById('processSaleForm');
+        const customerNameInput = document.getElementById('customer_name');
+
+        processSaleForm.addEventListener('submit', function (e) {
+            if (!customerNameInput.value.trim()) {
+                e.preventDefault();
+                alert('Please enter customer name');
+                customerNameInput.focus();
+                return false;
+            }
+        });
+    });
+</script>

@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}Update Stock - {{ product.name }}{% endblock %}
+{% block content %}
+<h2 class="mb-4">Update Stock: {{ product.name }}</h2>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Current Stock Information</h5>
+    </div>
+    <div class="card-body">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <p><strong>Current Quantity:</strong> {{ product.quantity }} {{ product.unit }}</p>
+                <p><strong>Price:</strong> ${{ "%.2f"|format(product.price) }}</p>
+            </div>
+        </div>
+
+        <form method="POST" action="{{ url_for('update_stock', product_id=product.id) }}">
+            <div class="mb-3">
+                <label for="quantity" class="form-label">Quantity to Add</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" min="1" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Stock</button>
+            <a href="{{ url_for('products') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

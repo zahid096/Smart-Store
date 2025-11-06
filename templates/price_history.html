@@ -1,0 +1,42 @@
+<!-- templates/price_history.html -->
+{% extends "layout.html" %}
+{% block title %}Price History - {{ product.name }}{% endblock %}
+{% block content %}
+<h2 class="mb-4">Price History: {{ product.name }}</h2>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Price Changes</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Old Price</th>
+                        <th>New Price</th>
+                        <th>Change</th>
+                        <th>Changed By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for change in price_history %}
+                    <tr>
+                        <td>{{ change.changed_at }}</td>
+                        <td>${{ "%.2f"|format(change.old_price) }}</td>
+                        <td>${{ "%.2f"|format(change.new_price) }}</td>
+                        <td
+                            class="{% if change.new_price > change.old_price %}text-danger{% else %}text-success{% endif %}">
+                            ${{ "%.2f"|format(change.new_price - change.old_price) }}
+                        </td>
+                        <td>{{ change.username or 'System' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a href="{{ url_for('products') }}" class="btn btn-secondary mt-3">Back to Products</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block title %}Receipt #{{ order.id }}{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center printable-area">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-white text-center">
+                <h4 class="mb-0">Smartventory</h4>
+                <p class="mb-0">Business Street, Gopalgonj City</p>
+                <p class="mb-0">Phone: 01781729254</p>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    <h5>RECEIPT</h5>
+                    <p class="mb-0">Order ID: {{ order.id }}</p>
+                    <p>{{ order.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                    <p class="mb-0">Customer: {{ order.customer_name }}</p>
+                </div>
+
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td>{{ item.product_name }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>${{ "%.2f"|format(item.unit_price) }}</td>
+                            <td>${{ "%.2f"|format(item.total_price) }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr class="table-active">
+                            <th colspan="3">Total</th>
+                            <th>${{ "%.2f"|format(order.total_amount) }}</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div class="text-center mt-4">
+                    <p>Thank you for your purchase!</p>
+                </div>
+
+                <!-- ✅ Buttons only for screen, not for print -->
+                <div class="text-center mt-3 no-print">
+                    <button onclick="window.print()" class="btn btn-primary">Print Receipt</button>
+                    <a href="{{ url_for('point_of_sale') }}" class="btn btn-secondary">New Sale</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

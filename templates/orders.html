@@ -1,0 +1,47 @@
+<!-- templates/orders.html -->
+{% extends "layout.html" %}
+{% block title %}Order List{% endblock %}
+{% block content %}
+<h2 class="mb-4">Order List</h2>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>All Orders</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Total Amount</th>
+                        <th>Date</th>
+                        <th>Cashier</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.customer_name or 'Not specified' }}</td>
+                        <td>${{ "%.2f"|format(order.total_amount) }}</td>
+                        <td>{{ order.created_at }}</td>
+                        <td>{{ order.cashier }}</td>
+                        <td>
+                            <a href="{{ url_for('order_details', order_id=order.id) }}" class="btn btn-sm btn-primary">
+                                View Details
+                            </a>
+                            <a href="{{ url_for('view_receipt', order_id=order.id) }}" class="btn btn-sm btn-secondary">
+                                Receipt
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

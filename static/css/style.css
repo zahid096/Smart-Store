@@ -1,0 +1,194 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+}
+
+.card {
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 40, 50, 0.15);
+    margin-bottom: 1.5rem;
+}
+
+.card-header {
+    font-weight: 500;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table {
+    font-size: 0.9rem;
+}
+
+.table th {
+    font-weight: 600;
+    background-color: #f8f9fa;
+}
+
+.badge {
+    font-weight: 500;
+    padding: 0.35em 0.65em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1rem;
+    }
+
+    .table-responsive {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Login page specific styles */
+.login .card,
+.register .card {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.login .card-header,
+.register .card-header {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+/* Dashboard card styles */
+.dashboard .card {
+    transition: transform 0.2s;
+}
+
+.dashboard .card:hover {
+    transform: translateY(-5px);
+}
+
+.dashboard .card a {
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+/* Status badges */
+.badge-out-of-stock {
+    background-color: #dc3545;
+    color: white;
+}
+
+.badge-low-stock {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-in-stock {
+    background-color: #28a745;
+    color: white;
+}
+
+/* POS specific styles */
+.pos .table-sm td,
+.pos .table-sm th {
+    padding: 0.3rem;
+}
+
+.receipt .card {
+    max-width: 400px;
+    margin: 0 auto;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    .printable-area,
+    .printable-area * {
+        visibility: visible !important;
+    }
+
+    .printable-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding: 20px;
+        z-index: 9999;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    table,
+    thead,
+    tbody,
+    tfoot,
+    tr,
+    th,
+    td {
+        visibility: visible !important;
+    }
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* FOOTER STYLE */
+footer {
+    flex-shrink: 0;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 0 !important;
+}
+
+/* style.css-তে নিচের স্টাইলগুলো যোগ করুন */
+.btn-warning {
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-warning:hover {
+    color: #212529;
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+.price-change-log {
+    font-size: 0.85rem;
+}
+
+.price-change-log .increase {
+    color: #dc3545;
+}
+
+.price-change-log .decrease {
+    color: #28a745;
+}
