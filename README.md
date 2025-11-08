@@ -82,8 +82,10 @@ smart-shop-inventory/
 ✅ Multi-user roles (Admin, Cashier, Manager)   
 ✅ Cloud-based deployment   
 
+---
+
 ## 💬 Contact 
 
-Developer: Zahid Al Mahmud   
+Developer: Md Zahid Hasan    
 📧 Email: mdzahidhasan096@gmail.com   
 🌐 GitHub: https://github.com/zahid096   
