@@ -54,13 +54,13 @@ It’s ideal for **small and medium-sized stores** looking to modernize their in
 ## 📁 Project Structure
 smart-shop-inventory/
 │
-├── app.py # Main Flask application
-├── config.py # Database configuration file
-├── requirements.txt # Python dependencies
-├── database/
-│ └── smartshop.sql # MySQL database file
-├── static/ # CSS, JS, and images
-├── templates/ # HTML templates
+├── app.py # Main Flask application 
+├── config.py # Database configuration file 
+├── requirements.txt # Python dependencies 
+├── database/ 
+│ └── smartshop.sql # MySQL database file 
+├── static/ # CSS, JS, and images 
+├── templates/ # HTML templates 
 └── README.md # Documentation file
 
 ---
@@ -76,14 +76,14 @@ smart-shop-inventory/
 
 ## 🔮 Future Enhancements
 
-✅ Add barcode scanning support
-✅ Generate PDF/Excel reports
-✅ Low-stock email notifications
-✅ Multi-user roles (Admin, Cashier, Manager)
-✅ Cloud-based deployment
+✅ Add barcode scanning support 
+✅ Generate PDF/Excel reports 
+✅ Low-stock email notifications 
+✅ Multi-user roles (Admin, Cashier, Manager) 
+✅ Cloud-based deployment 
 
-## 💬 Contact
+## 💬 Contact 
 
-Developer: Zahid Al Mahmud
-📧 Email: mdzahidhasan096@gmail.com
-🌐 GitHub: https://github.com/zahid096
+Developer: Zahid Al Mahmud 
+📧 Email: mdzahidhasan096@gmail.com 
+🌐 GitHub: https://github.com/zahid096 
